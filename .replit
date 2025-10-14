@@ -34,7 +34,12 @@ externalPort = 80
 localPort = 8000
 externalPort = 8000
 
+[[ports]]
+localPort = 44155
+externalPort = 3000
+
 [deployment]
-deploymentTarget = "autoscale"
+deploymentTarget = "cloudrun"
 run = ["bash", "run-production.sh"]
 build = ["bash", "build.sh"]
+publicDir = "/"
