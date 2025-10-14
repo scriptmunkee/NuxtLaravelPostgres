@@ -11,6 +11,7 @@ class PetListing extends Model
         'title',
         'description',
         'breed',
+        'location',
         'age_months',
         'price',
         'gender',

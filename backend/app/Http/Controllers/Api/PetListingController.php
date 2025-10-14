@@ -16,6 +16,10 @@ class PetListingController extends Controller
             $query->where('breed', 'like', '%' . $request->breed . '%');
         }
 
+        if ($request->has('location')) {
+            $query->where('location', 'like', '%' . $request->location . '%');
+        }
+
         if ($request->has('max_price')) {
             $query->where('price', '<=', $request->max_price);
         }
@@ -31,6 +35,7 @@ class PetListingController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'breed' => 'required|string|max:255',
+            'location' => 'nullable|string|max:255',
             'age_months' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
             'gender' => 'nullable|string|in:male,female',
@@ -58,6 +63,7 @@ class PetListingController extends Controller
             'title' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string',
             'breed' => 'sometimes|required|string|max:255',
+            'location' => 'nullable|string|max:255',
             'age_months' => 'sometimes|required|integer|min:0',
             'price' => 'sometimes|required|numeric|min:0',
             'gender' => 'nullable|string|in:male,female',
