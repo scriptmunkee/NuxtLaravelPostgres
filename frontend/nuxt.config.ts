@@ -1,36 +1,30 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  
-  modules: ['@nuxtjs/tailwindcss'],
-  
+
+  // Application configuration
+  app: {
+    head: {
+      title: 'Pet Listing - Find Your Perfect Pet',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Browse and find your perfect pet companion' }
+      ]
+    }
+  },
+
+  // Runtime configuration for API URL
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api'
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000/api'
     }
   },
 
-  nitro: {
-    devProxy: {
-      '/api': {
-        target: 'http://localhost:8000/api',
-        changeOrigin: true
-      }
-    },
-    routeRules: {
-      '/api/**': { 
-        proxy: 'http://localhost:8000/api/**'
-      }
-    }
-  },
+  // CSS configuration
+  css: [],
 
-  vite: {
-    server: {
-      host: '0.0.0.0',
-      port: 5000,
-      hmr: {
-        clientPort: 5000
-      }
-    }
-  }
+  // Modules
+  modules: []
 })

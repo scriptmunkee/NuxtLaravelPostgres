@@ -1,6 +1,9 @@
 <template>
   <div>
-    <NuxtRouteAnnouncer />
     <NuxtPage />
   </div>
 </template>
+
+<script setup lang="ts">
+// Root component for the Nuxt application
+</script>
