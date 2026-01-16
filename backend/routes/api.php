@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ListingController;
+use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\MessageController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,11 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{category}', [CategoryController::class, 'show']);
 Route::get('/categories/{category}/breeds', [CategoryController::class, 'breeds']);
+
+// Locations (public)
+Route::get('/locations', [LocationController::class, 'index']);
+Route::get('/locations/search', [LocationController::class, 'search']);
+Route::get('/locations/{location}', [LocationController::class, 'show']);
 
 // Listings (public browsing)
 Route::get('/listings', [ListingController::class, 'index']);
