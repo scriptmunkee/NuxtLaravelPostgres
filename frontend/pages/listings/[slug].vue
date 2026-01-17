@@ -239,13 +239,16 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const router = useRouter()
 const { fetchListing } = useListings()
 const { isAuthenticated, user } = useAuth()
+const { checkFavorite, toggleFavorite: toggleFav } = useFavorites()
 
 const listing = ref(null)
 const loading = ref(true)
 const currentImageIndex = ref(0)
 const isFavorited = ref(false)
+const showMessageModal = ref(false)
 
 // Fetch listing data
 onMounted(async () => {
@@ -253,9 +256,10 @@ onMounted(async () => {
     const slug = route.params.slug as string
     listing.value = await fetchListing(slug)
 
-    // Increment view count
-    // TODO: Add API endpoint to track views
-
+    // Check if favorited
+    if (isAuthenticated.value && listing.value?.id) {
+      isFavorited.value = await checkFavorite(listing.value.id)
+    }
   } catch (error) {
     console.error('Error fetching listing:', error)
   } finally {
@@ -337,14 +341,21 @@ const openLightbox = () => {
 }
 
 const openMessageModal = () => {
-  // TODO: Implement messaging modal
-  console.log('Open message modal')
+  showMessageModal.value = true
 }
 
 const toggleFavorite = async () => {
-  // TODO: Implement favorites functionality
-  isFavorited.value = !isFavorited.value
-  console.log('Toggle favorite')
+  if (!isAuthenticated.value) {
+    router.push('/auth/login')
+    return
+  }
+
+  if (!listing.value?.id) return
+
+  const result = await toggleFav(listing.value.id, isFavorited.value)
+  if (result.success) {
+    isFavorited.value = result.favorited
+  }
 }
 
 // SEO Meta tags

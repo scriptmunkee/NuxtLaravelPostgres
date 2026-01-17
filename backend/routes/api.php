@@ -59,9 +59,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/favorites', [FavoriteController::class, 'index']);
     Route::post('/listings/{listing}/favorite', [FavoriteController::class, 'store']);
     Route::delete('/listings/{listing}/unfavorite', [FavoriteController::class, 'destroy']);
+    Route::get('/listings/{listing}/favorite/check', [FavoriteController::class, 'check']);
 
     // Messages
     Route::get('/messages', [MessageController::class, 'index']);
+    Route::get('/messages/listing/{listing}/user/{user}', [MessageController::class, 'conversation']);
     Route::post('/messages', [MessageController::class, 'store']);
     Route::put('/messages/{message}/read', [MessageController::class, 'markAsRead']);
 });
