@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\ListingController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +40,9 @@ Route::get('/listings', [ListingController::class, 'index']);
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 Route::get('/listings/search', [ListingController::class, 'search']);
 
+// Reviews (public viewing)
+Route::get('/users/{user}/reviews', [ReviewController::class, 'index']);
+
 // Protected routes - require authentication
 Route::middleware('auth:sanctum')->group(function () {
     // Auth
@@ -66,4 +71,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/messages/listing/{listing}/user/{user}', [MessageController::class, 'conversation']);
     Route::post('/messages', [MessageController::class, 'store']);
     Route::put('/messages/{message}/read', [MessageController::class, 'markAsRead']);
+
+    // Reports
+    Route::post('/reports', [ReportController::class, 'store']);
+    Route::get('/reports', [ReportController::class, 'index']); // TODO: Admin only
+    Route::put('/reports/{report}', [ReportController::class, 'update']); // TODO: Admin only
+
+    // Reviews
+    Route::post('/reviews', [ReviewController::class, 'store']);
+    Route::put('/reviews/{review}', [ReviewController::class, 'update']);
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy']);
 });

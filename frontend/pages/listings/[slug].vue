@@ -216,13 +216,24 @@
             </div>
 
             <!-- Report Button -->
-            <button class="w-full mt-4 text-sm text-red-600 hover:text-red-700">
+            <button
+              @click="showReportModal = true"
+              class="w-full mt-4 text-sm text-red-600 hover:text-red-700"
+            >
               Report this listing
             </button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Report Modal -->
+    <ReportModal
+      :is-open="showReportModal"
+      :listing-id="listing?.id"
+      @close="showReportModal = false"
+      @submitted="handleReportSubmitted"
+    />
   </div>
 
   <div v-else class="min-h-screen flex items-center justify-center">
@@ -249,6 +260,7 @@ const loading = ref(true)
 const currentImageIndex = ref(0)
 const isFavorited = ref(false)
 const showMessageModal = ref(false)
+const showReportModal = ref(false)
 
 // Fetch listing data
 onMounted(async () => {
@@ -356,6 +368,12 @@ const toggleFavorite = async () => {
   if (result.success) {
     isFavorited.value = result.favorited
   }
+}
+
+const handleReportSubmitted = () => {
+  // Report submitted successfully
+  // Could show a toast notification here
+  console.log('Report submitted successfully')
 }
 
 // SEO Meta tags
