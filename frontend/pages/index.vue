@@ -11,6 +11,11 @@
         <p>This is a work in progress. Database planning and features coming soon!</p>
       </section>
 
+      <section class="tools">
+        <h3>Tools</h3>
+        <NuxtLink to="/foi" class="tool-link">FOI Request Tracker (WhatDoTheyKnow)</NuxtLink>
+      </section>
+
       <section class="tech-stack">
         <h3>Tech Stack</h3>
         <ul>

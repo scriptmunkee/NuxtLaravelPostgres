@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'wdtk' => [
+        'base_url' => env('WDTK_BASE_URL', 'https://www.whatdotheyknow.com'),
+        'poll_interval_minutes' => env('WDTK_POLL_INTERVAL', 60),
+        'request_delay_ms' => env('WDTK_REQUEST_DELAY_MS', 500),
+    ],
+
 ];
